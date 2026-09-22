@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.log
+chime_log.txt
+state.txt
+.DS_Store
