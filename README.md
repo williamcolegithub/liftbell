@@ -1,7 +1,13 @@
-# Chime Timer
+# LiftBell
 
-macOS menu bar timer that chimes every 30 minutes and pops up a rep counter
-for a short strength set at your desk.
+The bell rings every 30 minutes. You lift.
+
+A macOS menu bar timer that chimes on the half hour and pops up a rep
+counter for one short strength set at your desk.
+
+<p align="center">
+  <img src="docs/overlay.png" width="368" alt="LiftBell overlay counting rep 6 of 12 for bicep curls">
+</p>
 
 ## What it does
 

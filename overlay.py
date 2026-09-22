@@ -44,6 +44,8 @@ class CircleButton(FirstClickButton):
 REPS = 12
 READY_SECONDS = 5
 PHASE_SECONDS = 0.5
+SPEECH_RATE_NAME = 200   # words per minute for the exercise name
+SPEECH_RATE_BEAT = 340   # fast enough to finish each cue inside one beat
 PHASES = [
     ("DOWN", "direction"),
     ("3", "count"),
@@ -93,7 +95,6 @@ class Overlay(NSObject):
         self.phase_label = None
         self.sound_btn = None
         self.synth = NSSpeechSynthesizer.alloc().initWithVoice_(None)
-        self.synth.setRate_(200)
         return self
 
     def showWindow(self):
@@ -158,7 +159,7 @@ class Overlay(NSObject):
         self.window.makeKeyAndOrderFront_(None)
 
         if self.exercise:
-            self._speak(self.exercise)
+            self._speak(self.exercise, SPEECH_RATE_NAME)
         self._start_timer(1.0)
         app.run()
 
@@ -182,9 +183,13 @@ class Overlay(NSObject):
         app.postEvent_atStart_(e, True)
 
     @objc.python_method
-    def _speak(self, text):
-        if self.audio_on:
-            self.synth.startSpeakingString_(text)
+    def _speak(self, text, rate=SPEECH_RATE_BEAT):
+        if not self.audio_on:
+            return
+        # Cut off whatever is still playing so every cue lands on its beat.
+        self.synth.stopSpeaking()
+        self.synth.setRate_(rate)
+        self.synth.startSpeakingString_(text)
 
     @objc.typedSelector(b"v@:@")
     def toggleSound_(self, sender):
