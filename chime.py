@@ -10,7 +10,6 @@ import rumps
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE = os.path.join(APP_DIR, "chime_log.txt")
-STATE_FILE = os.path.join(APP_DIR, "state.txt")
 SOUND_FILE = "/System/Library/Sounds/Hero.aiff"
 VOLUME = 3.0
 INTERVAL_SECONDS = 30 * 60
@@ -30,7 +29,8 @@ class ChimeApp(rumps.App):
         self.status_item = rumps.MenuItem("Cycles today: 0 / 0")
         self.status_item.set_callback(None)
         self.menu = [self.toggle_item, self.responded_item, self.view_log_item, self.reset_item, None, self.status_item]
-        self.enabled = self._load_enabled()
+        # Always start enabled. The daily 10:00 start overrides any earlier "Turn off".
+        self.enabled = True
         self.overlay_timer = None
         self.exercise_bag = []
         self.today = datetime.date.today()
@@ -44,17 +44,6 @@ class ChimeApp(rumps.App):
             self.title = "⏱ off"
         self.tick_timer = rumps.Timer(self.tick, 1)
         self.tick_timer.start()
-
-    def _load_enabled(self):
-        try:
-            with open(STATE_FILE) as f:
-                return f.read().strip() != "off"
-        except OSError:
-            return True
-
-    def _save_enabled(self):
-        with open(STATE_FILE, "w") as f:
-            f.write("on" if self.enabled else "off")
 
     def _roll_day_if_needed(self):
         today = datetime.date.today()
@@ -107,7 +96,6 @@ class ChimeApp(rumps.App):
 
     def toggle_timer(self, _):
         self.enabled = not self.enabled
-        self._save_enabled()
         if not self.enabled and self.overlay_timer is not None:
             self.overlay_timer.cancel()
         if self.enabled:
