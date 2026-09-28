@@ -42,7 +42,7 @@ class CircleButton(FirstClickButton):
         objc.super(CircleButton, self).drawRect_(rect)
 
 REPS = 12
-READY_SECONDS = 5
+READY_SECONDS = 15
 PHASE_SECONDS = 0.5
 SPEECH_RATE_NAME = 200   # words per minute for the exercise name
 SPEECH_RATE_BEAT = 340   # fast enough to finish each cue inside one beat

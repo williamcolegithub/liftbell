@@ -11,10 +11,10 @@ import rumps
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE = os.path.join(APP_DIR, "chime_log.txt")
 STATE_FILE = os.path.join(APP_DIR, "state.txt")
-SOUND_FILE = "/System/Library/Sounds/Glass.aiff"
+SOUND_FILE = "/System/Library/Sounds/Hero.aiff"
 VOLUME = 3.0
 INTERVAL_SECONDS = 30 * 60
-OVERLAY_DELAY = 20
+OVERLAY_DELAY = 5
 OVERLAY_SCRIPT = os.path.join(APP_DIR, "overlay.py")
 PYTHON = os.path.join(APP_DIR, ".venv", "bin", "python3")
 EXERCISES = ["Wrist curls", "Bicep curls", "Overhead press", "Bench press"]

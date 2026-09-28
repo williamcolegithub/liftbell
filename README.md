@@ -12,10 +12,11 @@ counter for one short strength set at your desk.
 ## What it does
 
 - Menu bar countdown. Chimes when it reaches zero, then restarts.
-- 20 seconds after the chime, a floating overlay opens with one exercise:
+- 5 seconds after the chime, a floating overlay opens with one exercise:
   wrist curls, bicep curls, overhead press, or bench press. Each exercise
   comes up once before any repeats.
-- The overlay counts 12 reps. Each rep is DOWN 3 2 1 UP 1 2, half a second
+- The overlay shows the exercise for 15 seconds, then counts 12 reps. Each
+  rep is DOWN 3 2 1 UP 1 2, half a second
   per beat, spoken aloud. Close it with the X or Escape.
 - Menu items: turn off, I responded, view log, reset timer, cycles today.
 
